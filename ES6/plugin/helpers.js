@@ -17,6 +17,21 @@ const myPlugin = {
 
         }
     },
+    curry2: function (func, ...args) {
+        var that = this
+        return function (...subArgs) {
+            var totalArgs = [...args, ...subArgs]
+            if (totalArgs.length < func.length) {
+                // return curry 
+                totalArgs.unshift(func)
+                return curry2.apply(that, totalArgs)
+            } else {
+                // invoke func
+                return func.apply(null, totalArgs)
+            }
+
+        }
+    },
     pipe: function () {
         var funcs = Array.from(arguments)
         return function (val) {
