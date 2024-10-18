@@ -2,6 +2,26 @@ const PENDING = 'pending'
 const FULFILLED = 'fulfilled'
 const REJECTED = 'rejected'
 
+
+function runMicroTask(callback) {
+    if (process && process.nextTick) {
+        process.nextTick(callback)
+    } else if (MutationObserver) {
+        const p = document.createElement('p')
+        const observer = new MutationObserver(callback)
+        observer.observe(p, {
+            childList: true
+        })
+        p.innerHTML = 1
+    } else {
+        setTimeout(callback, 0)
+    }
+}
+
+// setTimeout(() => { console.log(1) })
+// runMicroTask(() => { console.log(3) })
+// console.log(2)
+
 class MyPromise {
     constructor(executor) {
         this._state = PENDING
@@ -11,7 +31,12 @@ class MyPromise {
         } catch (error) {
             _reject(error)
         }
+    }
 
+    then(onFulfilled, onRejected) {
+        return new MyPromise((resolve, reject) => {
+
+        })
     }
 
     _changeState(state, value) {
