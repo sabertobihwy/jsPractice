@@ -39,7 +39,7 @@ class MyPromise {
     }
     // data : mypromise - ok 
     //          promise - no
-    static resovle(data) {
+    static resolve(data) {
         if (data instanceof MyPromise) {
             return data
         }
@@ -56,6 +56,40 @@ class MyPromise {
     static reject(reason) {
         return new MyPromise((_, reject) => {
             reject(reason)
+        })
+    }
+
+    /**
+     * 1. promps is an iterable obj
+     * 2. promps can be [pro,pro,4]
+     * 3. all resolve -> fulfilled []
+     *    reject -> rejected reason  
+     * @param {} proms 
+     */
+    static all(proms) {
+        return new MyPromise((resolve, reject) => {
+            try {
+                let count = 0
+                let fulfilledCount = 0
+                const results = []
+                for (const p of proms) {
+                    let index = count
+                    count++
+                    MyPromise.resolve(p).then((data) => {
+                        fulfilledCount++
+                        results[index] = data
+                        if (fulfilledCount === count) {
+                            resolve(results)
+                        }
+                    }, reject)
+                }
+                if (count === 0) {
+                    return resolve(results)
+                }
+            } catch (error) {
+                reject(error)
+            }
+
         })
     }
 
@@ -214,3 +248,16 @@ Promise.prototype.finally = function (fn) {
             throw reason
         })
 }
+
+let pro1 = new MyPromise((resolve, reject) => {
+    setTimeout(() => {
+        reject(1)
+    }, 1000)
+})
+
+MyPromise.all([pro1,
+    MyPromise.resolve(2),
+    MyPromise.resolve(3),
+    4]
+).then((data) => { console.log(data) }, (reason) => { console.log(reason) })
+// [1,2,3,4]
