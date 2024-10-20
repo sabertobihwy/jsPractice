@@ -93,6 +93,41 @@ class MyPromise {
         })
     }
 
+    /**
+     *  proms里面的全部complete后返回，只有成功
+     */
+    static allSettled(proms) {
+        const results = []
+        for (const p of proms) {
+            results.push(MyPromise.resolve(p).then((data) => {
+                return {
+                    status: FULFILLED,
+                    value: data
+                }
+            }, (reason) => {
+                return {
+                    status: REJECTED,
+                    value: reason
+                }
+            }))
+        }
+        return MyPromise.all(results)
+    }
+
+    static race(proms) {
+        return new MyPromise((resolve, reject) => {
+            for (const p of proms) {
+                // MyPromise.resolve(p).then((data) => {
+                //     resolve(data)
+                // }, (reason) => {
+                //     reject(reason)
+                // })
+                MyPromise.resolve(p).then(resolve, reject)
+            }
+        })
+
+    }
+
     _runOneHandler({ status, handler, resolve, reject }) {
         if (this._state !== status) {
             return
@@ -255,9 +290,29 @@ let pro1 = new MyPromise((resolve, reject) => {
     }, 1000)
 })
 
-MyPromise.all([pro1,
-    MyPromise.resolve(2),
-    MyPromise.resolve(3),
+let pro2 = new MyPromise((resolve, reject) => {
+    setTimeout(() => {
+        resolve(2)
+    }, 2000)
+})
+
+let pro3 = new MyPromise((resolve, reject) => {
+    setTimeout(() => {
+        resolve(3)
+    }, 3000)
+})
+
+
+
+// MyPromise.allSettled([pro1,
+//     MyPromise.resolve(2),
+//     MyPromise.resolve(3),
+//     4]
+// ).then((data) => { console.log(data) }, (reason) => { console.log(reason) })
+// [1,2,3,4]
+
+MyPromise.race([pro1,
+    pro2,
+    pro3,
     4]
 ).then((data) => { console.log(data) }, (reason) => { console.log(reason) })
-// [1,2,3,4]
