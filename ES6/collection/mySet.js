@@ -15,6 +15,10 @@ class MySet {
         }
     }
 
+    get size() {
+        return this._data.length
+    }
+
     forEach(callback) {
         for (const data of this._data) {
             callback(data, data, this)
