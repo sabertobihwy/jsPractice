@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="container"></div>
+    <script>
+        const dom = document.querySelector("#container")
+        function observer(target) {
+            const proxy = new Proxy(target, {
+                set(target, attrName, value) {
+                    Reflect.set(target, attrName, value)
+                    render()
+                },
+                get(target, attrName) {
+                    Reflect.get(target, attrName)
+                }
+
+            })
+            render()
+            function render() {
+                let html = ``
+                for (const attrName in target) {
+                    html += `<p>
+                            <span>${attrName}</span>
+                            <span>${target[attrName]}</span>
+                        </p>`
+                }
+                dom.innerHTML = html
+            }
+            return proxy
+        }
+
+        const p = observer({ a: 1, b: 2 })
+        p.c = 2 
+    </script>
+</body>
+
+</html>
