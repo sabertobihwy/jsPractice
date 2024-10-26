@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Mock.js/1.0.1-beta1/mock-min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const fakeData = Mock.mock({
+            'name|1-5': 'abc',
+            'age|10-50': 0,  // 10-50 随机数
+            'arr|5-10': [{
+                'id|+1': 1, // 递增
+                'name|3-5': 'abc', // 重复abc
+                tel: /1\d{10}/,  // regex模板
+                uname: 'name@id',  // @id引用
+                addr: '@city(true)',
+                avatar: '@image'
+            }]
+        })
+        Mock.mock('/hello', fakeData)
+        axios.get('/hello').then(resp => console.log(resp))
+    </script>
+</body>
+
+</html>
