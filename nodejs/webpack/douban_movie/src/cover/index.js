@@ -6,11 +6,13 @@ import musicurl from '@/assets/music.mp3'
 function init(){
     const container = $('<div>').addClass(style.container).appendTo('#app')
     const video = $('<video>').prop('src',mp4url)
-    .prop('autoplay',true)    
+    .prop('autoplay',true)
+    .prop('muted',true)     
     .prop('loop',true)    
     .appendTo(container)
     const audio = $('<audio>').prop('src',musicurl)
-    .prop('autoplay',true)    
+    .prop('autoplay',true)  
+    .prop('muted',true)   
     .prop('loop',true) .appendTo(container)
     $('<span>').text('DOUBAN MOVIE').addClass(style.textContainer).appendTo(container)
 

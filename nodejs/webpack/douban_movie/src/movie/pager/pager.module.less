@@ -1,0 +1,20 @@
+.container{
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    align-items: center;     /* 垂直居中 */
+    font-size: 30px;
+    font-weight: 500;
+    span{
+        margin: 0 7px;
+        color: rgb(27, 101, 238);
+        cursor: pointer;
+        &.active{
+            color: red;
+            cursor: none;
+        }
+        &.disable{
+            color: rgba(80, 84, 90, 0.493);
+            cursor: none;
+        }
+    }
+}
