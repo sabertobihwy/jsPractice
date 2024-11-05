@@ -1,11 +1,3 @@
-import musicurl from '@/assets/music.mp3'
+import {getMovies} from "./func"
 
-console.log("movie")
-
-function init(){
-
-    console.log(musicurl)
-
-}
-
-init()
+getMovies(1,3).then(resp => console.log(resp.data))
