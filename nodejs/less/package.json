@@ -1,0 +1,15 @@
+{
+  "name": "less",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "p": "npx lessc index.less index.css", 
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "less": "^4.2.0"
+  }
+}
