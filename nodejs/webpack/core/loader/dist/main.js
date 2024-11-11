@@ -9,23 +9,13 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/assets/index.css":
+/***/ "./src/assets/image.png":
 /*!******************************!*\
-  !*** ./src/assets/index.css ***!
+  !*** ./src/assets/image.png ***!
   \******************************/
 /***/ ((module) => {
 
-eval("\n    var style = document.createElement('style');\n    style.innerHTML = `body {\r\n    background-color: cadetblue;\r\n}`\n    document.body.appendChild(style)   \n    module.exports =  `body {\r\n    background-color: cadetblue;\r\n}`\n    \n\n//# sourceURL=webpack://loader/./src/assets/index.css?");
-
-/***/ }),
-
-/***/ "./src/a.js":
-/*!******************!*\
-  !*** ./src/a.js ***!
-  \******************/
-/***/ ((module) => {
-
-eval("var a = 1 // 使用loader处理\r\nmodule.exports = a\n\n//# sourceURL=webpack://loader/./src/a.js?");
+eval("module.exports = 'image.077a8.png'\n\n//# sourceURL=webpack://loader/./src/assets/image.png?");
 
 /***/ }),
 
@@ -35,7 +25,7 @@ eval("var a = 1 // 使用loader处理\r\nmodule.exports = a\n\n//# sourceURL=web
   \**********************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("var a = __webpack_require__(/*! ./a */ \"./src/a.js\")\r\nvar css = __webpack_require__(/*! ./assets/index.css */ \"./src/assets/index.css\")\r\nconsole.log(css)\n\n//# sourceURL=webpack://loader/./src/index.js?");
+eval("// var a = require(\"./a\")\r\n// var css = require('./assets/index.css')\r\n//console.log(css)\r\n\r\nvar src = __webpack_require__(/*! ./assets/image.png */ \"./src/assets/image.png\")\r\nvar img = document.createElement('img')\r\nimg.src = src\r\ndocument.body.appendChild(img)\n\n//# sourceURL=webpack://loader/./src/index.js?");
 
 /***/ })
 

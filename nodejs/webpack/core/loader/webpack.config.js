@@ -7,6 +7,18 @@ module.exports = {
     module: {
         rules: [
             {
+                test: /\.(png|jpg)$/,
+                use: [
+                    {
+                        loader: './loader/image_loader.js',
+                        options:{
+                            limit: 2000,
+                            fileName: '[name].[contenthash:5].[ext]'
+                        }
+                    }
+                ]
+            },
+            {
                 test: /a\.js$/,
                 use: [
                     {
