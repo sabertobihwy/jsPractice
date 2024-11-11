@@ -1,2 +1,3 @@
 var a = require("./a")
-console.log(a)
+var css = require('./assets/index.css')
+console.log(css)

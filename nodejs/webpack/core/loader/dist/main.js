@@ -9,6 +9,16 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/assets/index.css":
+/*!******************************!*\
+  !*** ./src/assets/index.css ***!
+  \******************************/
+/***/ ((module) => {
+
+eval("\n    var style = document.createElement('style');\n    style.innerHTML = `body {\r\n    background-color: cadetblue;\r\n}`\n    document.body.appendChild(style)   \n    module.exports =  `body {\r\n    background-color: cadetblue;\r\n}`\n    \n\n//# sourceURL=webpack://loader/./src/assets/index.css?");
+
+/***/ }),
+
 /***/ "./src/a.js":
 /*!******************!*\
   !*** ./src/a.js ***!
@@ -25,7 +35,7 @@ eval("var a = 1 // 使用loader处理\r\nmodule.exports = a\n\n//# sourceURL=web
   \**********************/
 /***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
 
-eval("var a = __webpack_require__(/*! ./a */ \"./src/a.js\")\r\nconsole.log(a)\n\n//# sourceURL=webpack://loader/./src/index.js?");
+eval("var a = __webpack_require__(/*! ./a */ \"./src/a.js\")\r\nvar css = __webpack_require__(/*! ./assets/index.css */ \"./src/assets/index.css\")\r\nconsole.log(css)\n\n//# sourceURL=webpack://loader/./src/index.js?");
 
 /***/ })
 
