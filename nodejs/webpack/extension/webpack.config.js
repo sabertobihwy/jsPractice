@@ -38,6 +38,13 @@ module.exports = {
         modules: false
     },
     devServer:{
-        open: ['html/html/index.html']
+        open: ['html/html/index.html'],
+        proxy: {
+            '/api':{ 
+                target: "http://yuanjin.tech:5100",
+                changeOrigin: true,  // 更改请求头的host
+            },
+        },
     }
+    
 }
