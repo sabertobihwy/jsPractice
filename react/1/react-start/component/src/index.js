@@ -7,6 +7,7 @@ import Tick from './components/Tick';
 import Circle from './components/Circle';
 import CircleList from './components/CircleList.';
 import ModelTest from './components/common/Modal/ModelTest';
+import App from './App';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -51,4 +52,6 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 //---
 
 // Modal
-root.render(<ModelTest text={"广告位"}></ModelTest>)
+// root.render(<ModelTest text={"广告位"}></ModelTest>)
+
+root.render(<App/>)

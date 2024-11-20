@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import imgsrc from '../../../assets/pic.jpg'
 import Modal from './Modal'
 
-export default class ModelTest extends Component {
+export default class ThreeLayout extends Component {
     state = {
         showModal : true
     }

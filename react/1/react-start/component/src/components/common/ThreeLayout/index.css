@@ -1,0 +1,21 @@
+.container{
+    display: flex;
+    height: 500px; 
+}
+
+.container .main{
+    order: 2;
+    border: 1px solid tomato;
+    flex: 1 1 auto;
+    height: 100%; 
+}
+.container .left{
+    order: 1;
+    border: 1px solid blue;
+    height: 100%; 
+}
+.container .right{
+    order: 3;
+    border: 1px solid violet;
+    height: 100%; 
+}
