@@ -6,6 +6,7 @@ import ProvinceLst from './components/ProvinceLst';
 import Tick from './components/Tick';
 import Circle from './components/Circle';
 import CircleList from './components/CircleList.';
+import ModelTest from './components/common/Modal/ModelTest';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -36,14 +37,18 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 // tick()
 //-----------
-const c = {
-  left : 100,
-  top: 100,
-  xSpeed: 200,
-  ySpeed: 200,
-  color: 'green'
-}
+// const c = {
+//   left : 100,
+//   top: 100,
+//   xSpeed: 200,
+//   ySpeed: 200,
+//   color: 'green'
+// }
 
-// root.render(<> <Circle {...c}/> </>)
+// // root.render(<> <Circle {...c}/> </>)
 
-root.render(<CircleList/>)
+// root.render(<CircleList/>)
+//---
+
+// Modal
+root.render(<ModelTest text={"广告位"}></ModelTest>)

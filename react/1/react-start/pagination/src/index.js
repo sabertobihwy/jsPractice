@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import PagerList from './component/PagerList';
 import Comp from './component/Comp';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
