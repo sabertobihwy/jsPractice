@@ -1,28 +1,32 @@
 import React, { Component } from 'react'
-import CheckBoxInput from './CheckBoxInput'
+import GroupCheckboxComp from './CheckBoxInput'
 import getData from '../../../../services/getData'
 
 export default class Test extends Component {
     state = {
-        data : [
+        groupDatas : [
             // {value: "football", text: "足球"},
             // {value: "basketball", text: "篮球"},
             // {value: "movie", text: "电影"}
         ],
-        name: "hobby",
+        name: "province",
+        chooseData: []
 
     }
   async componentDidMount(){
     const ProvinceLst = await getData()
     console.log(ProvinceLst)
     this.setState({
-        data : ProvinceLst.map(item => {return {value: item.value, text: item.label}})
+        groupDatas : ProvinceLst.map(item => {return {value: item.value, text: item.label}})
     })
   }  
   render() {
     return (
       <div>
-        <CheckBoxInput {...this.state} onChange= 
+        {/* <CheckBoxInput {...this.state} onChange= 
+         {(newArr)=>{this.setState({chooseData: newArr}   )}}
+         /> */}
+         <GroupCheckboxComp {...this.state} onChange= 
          {(newArr)=>{this.setState({chooseData: newArr}   )}}
          />
         <button onClick={()=>{

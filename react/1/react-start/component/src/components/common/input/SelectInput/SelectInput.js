@@ -1,9 +1,34 @@
 import React, { Component } from 'react'
 import Type from '../../../../util/Type'
 import PropTypes from 'prop-types'
+import InputWrapper from '../../hoc/InputWrapper'
 
 
-export default class SelectInput extends Component {
+export class SingleSelectInput extends Component {
+  static defaultProps = {
+  }
+
+  static propTypes  = {
+    info: Type.singleData.isRequired,
+    onChange: Type.onChange,
+  }
+
+    // handleChange = (e)=>{
+    //   console.log(e.target.type)
+    //   this.props.onChange && this.props.onChange(e.target.checked,e.target.value,e.target.type)
+    // }
+
+    render() {
+        return (
+          <option value={this.props.info.value} > {this.props.info.text} </option>
+        )
+      }
+}
+
+export default InputWrapper(SingleSelectInput)
+
+
+export  class SelectInput extends Component {
   static defaultProps = {
     val : "120000"
   }

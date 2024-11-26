@@ -5,6 +5,10 @@ const Type = {
         text: PropTypes.string,
         value: PropTypes.string
     })),
+    singleData: PropTypes.shape({
+        text: PropTypes.string,
+        value: PropTypes.string
+    }),
     children: PropTypes.node,
     onChange: PropTypes.func,
     chooseData: PropTypes.arrayOf(PropTypes.string)

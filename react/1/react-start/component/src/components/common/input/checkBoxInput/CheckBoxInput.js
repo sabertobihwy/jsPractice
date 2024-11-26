@@ -1,8 +1,43 @@
 import React, { Component } from 'react'
 import Type from '../../../../util/Type'
 import PropTypes from 'prop-types'
+import InputWrapper from '../../hoc/InputWrapper'
 
-export default class CheckBoxInput extends Component {
+export class singleCheckboxInput extends Component{
+    static defaultProps = {
+        isChosen: false
+    }
+    static propTypes  = {
+        info: Type.singleData.isRequired,
+        name: PropTypes.string.isRequired,
+        onChange: Type.onChange,
+        isChosen:  PropTypes.bool
+    }
+    handleChange = (e)=>{
+        let isChosen = false 
+        if(e.target.checked){
+            isChosen = true
+        }
+        this.props.onChange && this.props.onChange(isChosen, e.target.value, e.target.type)
+    }
+    render() {
+        return (
+            <>
+            <input type="checkbox" 
+                name={this.props.name} 
+                checked = {this.props.isChosen}
+                value={this.props.info.value} onChange={this.handleChange}  /> 
+                {this.props.info.text}
+            </>    
+        )
+      }
+}
+
+const GroupCheckboxComp = InputWrapper(singleCheckboxInput)
+export default GroupCheckboxComp
+
+
+export  class CheckBoxInput extends Component {
     
     static defaultProps = {
         chooseData: ['120000']
