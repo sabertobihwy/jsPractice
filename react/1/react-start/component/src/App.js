@@ -7,7 +7,7 @@ import Test from './components/common/input/checkBoxInput/Test'
 import TestRadio from './components/common/input/radioInput/TestRadio'
 import TestSelect from './components/common/input/SelectInput/TestSelect'
 
-
+// debugger
 export default class App extends Component {
   render() {
     return (
@@ -18,6 +18,7 @@ export default class App extends Component {
         {/* <Form /> */}
         {/* <Test /> */}
         {/* <TestRadio /> */}
+
         <TestSelect />
       </>
     )

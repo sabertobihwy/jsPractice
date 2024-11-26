@@ -1,6 +1,18 @@
 import React, { Component } from 'react'
+import Type from '../../../../util/Type'
+import PropTypes from 'prop-types'
 
 export default class RadioInput extends Component {
+    static defaultProps = {
+        val : "120000"
+    }
+
+    static propTypes  = {
+        val: PropTypes.string,
+        name: PropTypes.string.isRequired,
+        onChange: Type.onChange
+    }
+
     handleChange = (e)=>{
         this.props.onChange && this.props.onChange(e.target.value)
     }

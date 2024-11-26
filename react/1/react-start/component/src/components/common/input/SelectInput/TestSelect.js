@@ -10,7 +10,7 @@ export default class TestSelect extends Component {
             // {value: "basketball", text: "篮球"},
             // {value: "movie", text: "电影"}
         ],
-        val: ""
+        val : "120000"
     }
   async componentDidMount(){
     const ProvinceLst = await getData()

@@ -9,7 +9,6 @@ export default class TestRadio extends Component {
             // {value: "basketball", text: "篮球"},
             // {value: "movie", text: "电影"}
         ],
-        val: ""
     }
   async componentDidMount(){
     const ProvinceLst = await getData()

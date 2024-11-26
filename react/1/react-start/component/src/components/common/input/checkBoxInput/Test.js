@@ -10,7 +10,7 @@ export default class Test extends Component {
             // {value: "movie", text: "电影"}
         ],
         name: "hobby",
-        chooseData: []
+
     }
   async componentDidMount(){
     const ProvinceLst = await getData()
@@ -22,7 +22,9 @@ export default class Test extends Component {
   render() {
     return (
       <div>
-        <CheckBoxInput {...this.state} onChange={(newArr)=>{this.setState({chooseData: newArr})}} />
+        <CheckBoxInput {...this.state} onChange= 
+         {(newArr)=>{this.setState({chooseData: newArr}   )}}
+         />
         <button onClick={()=>{
             console.log(this.state.chooseData)
         }}>获取文本框的值</button>

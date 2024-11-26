@@ -1,6 +1,19 @@
 import React, { Component } from 'react'
+import Type from '../../../../util/Type'
+import PropTypes from 'prop-types'
 
 export default class CheckBoxInput extends Component {
+    
+    static defaultProps = {
+        chooseData: ['120000']
+    }
+
+    static propTypes  = {
+        chooseData: Type.chooseData.isRequired,
+        name: PropTypes.string.isRequired,
+        onChange: Type.onChange
+    }
+
     handleChange = (e)=>{
         let newArr = [] 
         if(e.target.checked){
@@ -10,12 +23,17 @@ export default class CheckBoxInput extends Component {
         }
         this.props.onChange && this.props.onChange(newArr)
     }
-  render() {
-    const list = this.props.data.map((item)=> <label key={item.value}>
+
+    getCheckbox = (data)=>{
+        return data.map((item)=> <label key={item.value}>
         <input type="checkbox" name={this.props.name} 
         checked = {this.props.chooseData.includes(item.value)}
         value={item.value} onChange={this.handleChange}  /> {item.text}
     </label>  )
+    }
+
+  render() {
+    const list = this.getCheckbox(this.props.data)
     return (
       <div>
         {list}
