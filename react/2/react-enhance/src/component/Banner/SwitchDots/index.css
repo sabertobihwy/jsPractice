@@ -1,0 +1,25 @@
+.dotsContainer{
+    position: absolute;
+    bottom: 10px;
+    padding: 2px 4px;
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255,.3);
+    border-radius: 10px;
+    /* width: 50px; */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    z-index: 2;
+}
+
+.dot{
+    border-radius: 50%;
+    height: 8px;
+    width: 8px;
+    margin: 3px;
+    background-color: #fff;
+}
+
+.dot.active{
+    background-color: orangered;
+}

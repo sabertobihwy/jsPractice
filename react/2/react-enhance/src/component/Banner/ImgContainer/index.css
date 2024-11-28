@@ -1,0 +1,14 @@
+.ImgContainer{
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 520px;
+    height: 280px;
+    overflow: hidden;
+    box-sizing: border-box;
+    z-index: 1;
+}
+
+.ImgContainer:hover{
+    cursor: pointer;
+}

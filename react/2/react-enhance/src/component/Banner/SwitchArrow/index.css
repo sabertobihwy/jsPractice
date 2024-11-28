@@ -1,0 +1,27 @@
+.arrow{
+    position: absolute;
+    background-color: rgb(0, 0, 0,.5);
+    width: 20px;
+    height: 50px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.less{
+    left: 0px;
+    border-radius: 0 10px 10px 0;
+}
+
+.greater{
+    right: 0px;
+    border-radius:  10px 0 0 10px ;
+}
+
+.arrowText{
+    color: #fff;
+    line-height: 50px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
