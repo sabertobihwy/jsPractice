@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ImgContainer from './component/Banner/ImgContainer/ImgContainer'
 import ContextTest from './component/Context/ContextTest'
+import Test from './component/Form/Test'
 // import Test from './component/Banner/ImgContainer/ImgDiv/TestImgDiv'
 
 export default class App extends Component {
@@ -8,7 +9,8 @@ export default class App extends Component {
     return (
       <div>
         {/* <ImgContainer /> */}
-        <ContextTest />
+        {/* <ContextTest /> */}
+        <Test />
       </div>
     )
   }
