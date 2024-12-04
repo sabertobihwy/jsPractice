@@ -1,0 +1,26 @@
+.pagination{
+    display: flex;
+    justify-content: center;
+    height: 20px;
+    /* border: solid black 1px; */
+}
+
+.page{
+    height: 20px;
+    color: lightseagreen;
+    font-size: 10px;
+    line-height: 20px;
+    margin: 2px;
+    padding: 1px 4px;
+    cursor: pointer;
+    border: solid lightgray 1px;
+}
+
+.page.active{
+    color: red
+}
+
+.page.disable{
+    color: grey !important;
+    cursor: not-allowed;
+}
