@@ -1,9 +1,9 @@
-import Test from './components/pager/Test';
+import App1 from './components/imperativeHook/index.js'
 
 function App() {
   return (
     <>
-    <Test />
+    <App1 />
     </>
   );
 }

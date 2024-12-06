@@ -2,7 +2,7 @@ import React from 'react'
 import Pager from './Pager'
 import { useState, useEffect } from 'react';
 
-export default function Test(props) {
+export default function Test() {
     const [page, setPage] = useState(1)
     const [limit, setLimit] = useState(10)
     const [panelNumber, setPanelNumber] = useState(5)
