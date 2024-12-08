@@ -1,9 +1,10 @@
 import React from 'react'
+import { Navigate } from 'react-router-dom'
 
 export default function StudenrList() {
   return (
     <div>
-      111
+      <Navigate to="/classlist" replace />
     </div>
   )
 }
