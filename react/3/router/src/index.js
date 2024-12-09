@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './ProtectedRoute';
+// import App from './Scroll/Scroll'
+import App from './RouterGuard/Test1'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+     <App />
   </React.StrictMode>
 );
