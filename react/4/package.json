@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "path-to-regexp": "^8.2.0"
+  }
+}

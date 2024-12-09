@@ -11,7 +11,6 @@ function ProtectedRoute({element}){
     return <Navigate to="/login" replace />
   }
 }
-
 function User(){
   return (
     <div>

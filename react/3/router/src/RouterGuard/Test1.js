@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useRef, useLayoutEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate, useLocation } from 'react-router-dom';
 
 function Home() {
@@ -13,6 +13,7 @@ function RouteGuard({ children }) {
   //const [isBlocking, setIsBlocking] = useState(false);  // 是否阻止导航
   const [nextLocation, setNextLocation] = useState(null);  // 存储目标路径
   const [showDialog, setShowDialog] = useState(false);  // 控制弹窗显示
+  //const prevLocation = useRef(null)
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -38,11 +39,15 @@ function RouteGuard({ children }) {
   };
 
   // 路由跳转拦截
-//   useEffect(() => {
-//     if (isBlocking) {
-//       setShowDialog(true); // 路由变化时显示对话框
-//     }
-//   }, [isBlocking, location]);
+//   useLayoutEffect(() => {
+    
+//    if(prevLocation.current !== location.pathname){
+//     setNextLocation(location.pathname);
+//     setShowDialog(true)
+//    }
+//    prevLocation.current = location.pathname
+
+//   }, [location]);
 
   return (
     <>
