@@ -2,8 +2,8 @@ import React from 'react'
 import pathToRegexp from 'path-to-regexp'
 
 export default function TestPathToRegex() {
-    const path = '/api/:id/:page(\\d+)'
-    const result = convertPath(path,'/api/1/444')
+    const path = '/api/:id/:age'
+    const result = convertPath(path,'/api/1/30',{end: false })
     console.log(result)
   return (
     <div>
@@ -14,11 +14,13 @@ export default function TestPathToRegex() {
 
 /**
  * param: matchPath, path, options
+ * options 只要 strict, sensitive, exact
  * return: !match: undefined; match: obj{ attribute: value}
  */
-function convertPath(matchPath, path, options){
+function convertPath(matchPath, path){
     const keys = []
-    const result = pathToRegexp(matchPath,keys,options)
+    const result = pathToRegexp(matchPath,keys,getOptions())
+   
     const valueArr = result.exec(path)
     if(!valueArr){
         return undefined
@@ -34,3 +36,18 @@ function keyValueGenerate(values, keys){
     }
     return obj
 }
+
+function getOptions(options){
+    const defaultOpts = {
+        exact: true,
+        strict: false,
+        sensitive: false
+    }
+    const opts = {...defaultOpts, ...options}
+    return {
+        exact: opts.exact,
+        strict: opts.strict,
+        sensitive: opts.sensitive
+    }
+}
+
