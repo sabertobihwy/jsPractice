@@ -1,4 +1,6 @@
 import { IncreaseAction,UserAddAction } from "../action/Number";
+import {AddCitiesAction,IsLoadingAction} from '../action/Number'
+
 
 export function numberReducer(state = 0, action){
     switch(action.type){
@@ -20,6 +22,24 @@ export function UserReducer(state = initialState, action){
             return [...state, action.payload]
         default:
             return state    
+    }
+}
+
+export function CitiesReducer(state = [], action){
+    switch(action.type){
+        case AddCitiesAction:
+            return [...state, action.payload]
+        default:
+            return state        
+    }
+}
+
+export function LoadingReducer(state = false, action){
+    switch(action.type){
+        case IsLoadingAction:
+            return action.payload
+        default:
+            return state        
     }
 }
 

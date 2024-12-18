@@ -1,8 +1,16 @@
 import randomString from "./utils/tools"
 
-function createStore(defulatState, reducer){
+function createStore(reducer, defaultState, enhancer){
 
-    let currentState = defulatState 
+    if(typeof defaultState === 'function'){
+        enhancer = defaultState
+        defaultState = undefined
+    }
+    if(typeof enhancer === 'function'){
+        return enhancer(createStore)(reducer,defaultState)
+    }
+
+    let currentState = defaultState 
     const listeners = []
 
     dispatch({

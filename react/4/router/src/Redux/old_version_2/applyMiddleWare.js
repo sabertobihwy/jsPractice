@@ -2,7 +2,6 @@ export function logger1(store){
     return function(nextDispatch){
         return function dispatch(action){
             console.log("logger1")
-            //console.log(store.getState())
             nextDispatch(action)
         }
     }
@@ -24,12 +23,12 @@ function compose(...funcs){
 
 export default function applyMiddleware(...middlewares){
     return function (createStore){
-        return function(reducer){
+        return function(reducer, defaultState){
             let dispatch = () => {throw Error('middleware应用失败')}
-            const store = createStore(undefined, reducer)
+            const store = createStore(reducer, defaultState)
             const dispatchProvider = middlewares.map(mid => mid({
                 getState: store.getState,
-                dispatch: store.dispatch
+                dispatch: (...args)=>{dispatch(...args)}
             }))
             const nextDispatch = compose(...dispatchProvider)
             dispatch = nextDispatch(store.dispatch)

@@ -10,7 +10,9 @@ const reducer = combineReducer(
 )
 //const store = createStore(undefined, reducer)
 
-const store = applyMiddleware(logger1,logger2)(createStore)(reducer)
+//const store = applyMiddleware(logger1,logger2)(createStore)(reducer)
+
+const store = createStore(reducer, applyMiddleware(logger1,logger2))
 
 const unsubs = store.subscribe(()=>{console.log(store.getState())})
 
