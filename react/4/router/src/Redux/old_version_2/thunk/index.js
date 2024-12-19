@@ -1,10 +1,8 @@
-export async function fetchCities(){
-    const resp = await fetch('/api/citylist')
-    const data = await resp.json()
-    return data.data 
-}
-
-//fetchCities().then(resp => console.log(resp))
+// export async function fetchCities(){
+//     const resp = await fetch('/api/citylist')
+//     const data = await resp.json()
+//     return data.data 
+// }
 
 function thunkMiddleWare(){
     return store => next => action => {
