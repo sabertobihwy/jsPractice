@@ -8,10 +8,10 @@ function Counter(props) {
   return (
     <div>
       <h1>{props.number}</h1>
-      <button onClick={props.asyncIncrease}> 异步+ </button>
-      <button onClick={props.increase}> + </button>
-      <button onClick={props.asyncDecrease}> 异步- </button>
-      <button onClick={props.decrease}> - </button>
+      <button onClick={props.onAsyncIncrease}> 异步+ </button>
+      <button onClick={props.onIncrease}> + </button>
+      <button onClick={props.onAsyncDecrease}> 异步- </button>
+      <button onClick={props.onDecrease}> - </button>
     </div>
   )
 }
@@ -24,16 +24,16 @@ function maptoProps(state){
 
 function maptoDispatch(dispatch){
     return {
-        asyncIncrease: ()=>{
+        onAsyncIncrease: ()=>{
            dispatch(asyncIncrease())
         },
-        increase: ()=>{
+        onIncrease: ()=>{
             dispatch(increase())
         },
-        asyncDecrease: ()=>{
+        onAsyncDecrease: ()=>{
             dispatch(asyncDecrease())
         },
-        decrease: ()=>{
+        onDecrease: ()=>{
             dispatch(decrease())
         }
     }

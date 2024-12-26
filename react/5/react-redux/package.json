@@ -28,6 +28,7 @@
       "react-app/jest"
     ]
   },
+  "proxy": "http://study.duyiedu.com",
   "browserslist": {
     "production": [
       ">0.2%",
