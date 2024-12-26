@@ -1,7 +1,7 @@
-const IncreaseAction = Symbol('increase')
-const UserAddAction = Symbol('userAdd')
-const IsLoadingAction = Symbol('isloading')
-const AddCitiesAction = Symbol('addCities')
+const IncreaseAction = 'increase'
+const UserAddAction = 'userAdd'
+const IsLoadingAction = 'isloading'
+const AddCitiesAction = 'addCities'
 
 export {IncreaseAction,UserAddAction,IsLoadingAction,AddCitiesAction}
 

@@ -13,3 +13,12 @@ export function searchConditionReducer(state = initConditionVal , action){
             return state    
     }
 }
+
+export const  isLoadingReducer = (state = false , action)=>{
+    switch(action.type){
+        case actionType.isLoading:
+            return action.payload
+        default:
+            return state    
+    }
+}

@@ -1,5 +1,6 @@
 import combineReducer from './index'
-import { searchConditionReducer } from './movies/searchConditionReducer'
+import { LoadingReducer } from './index'
+import { isLoadingReducer, searchConditionReducer } from './movies/searchConditionReducer'
 import { searchResultReducer } from './movies/searchResultReducer'
 
 const moviesReducer =  combineReducer({
@@ -8,7 +9,9 @@ const moviesReducer =  combineReducer({
 })
 
 const reducer = combineReducer({
-    movies: moviesReducer
+    movies: moviesReducer,
+    isLoading: isLoadingReducer
 })
+
 
 export default reducer

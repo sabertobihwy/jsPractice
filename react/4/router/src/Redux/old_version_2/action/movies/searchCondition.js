@@ -1,7 +1,7 @@
 export const actionType = {
-    changeCondition: Symbol('searchCondition'),
-    getResult: Symbol('searchResult'),
-    isLoading: Symbol('isLoading')
+    changeCondition: 'searchCondition',
+    getResult: 'searchResult',
+    isLoading: 'isLoading'
 }
 
 export function setConditionAction(condition){

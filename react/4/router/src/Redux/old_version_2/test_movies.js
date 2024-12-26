@@ -17,4 +17,4 @@ store.dispatch(setConditionAction())
 
 store.dispatch(fetchMoviesAction())
 
-//unsubs()
+unsubs()

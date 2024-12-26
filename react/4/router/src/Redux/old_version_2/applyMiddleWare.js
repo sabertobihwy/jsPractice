@@ -25,7 +25,7 @@ export default function applyMiddleware(...middlewares){
     return function (createStore){
         return function(reducer, defaultState){
             let dispatch = () => {throw Error('middleware应用失败')}
-            const store = createStore(reducer, defaultState)
+            const store = createStore(reducer, defaultState) // 这个时候执行init dispatch，所以不会被中间件记录到
             const dispatchProvider = middlewares.map(mid => mid({
                 getState: store.getState,
                 dispatch: (...args)=>{dispatch(...args)}
