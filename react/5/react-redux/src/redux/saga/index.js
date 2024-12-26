@@ -1,4 +1,4 @@
-import { takeEvery,delay,put,take } from 'redux-saga/effects'
+import { takeEvery,delay,put } from 'redux-saga/effects'
 import { asyncIncrease,asyncDecrease,increase,decrease } from '../action/counter'
 
 function* rootSaga(){
