@@ -16,7 +16,8 @@ export default function Admin() {
     <Routes>
       <Route path='/' element={<Welcome/>} />
       <Route path='/studentlist' element={<StudenrList/>} />
-      <Route path='/classlist' element={<ClassList/>} />
+      {/* <Route path='/classlist' element={<ClassList/>} /> */}
+     
     </Routes>
         
     </Layout>

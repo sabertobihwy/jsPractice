@@ -42,6 +42,17 @@ const conditionReducer = handleActions({
     size: 10
 })
 
+const initialState = { currentPath: '/' };
+const routeReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case 'SET_PATH':
+      return { ...state, currentPath: action.payload };
+    default:
+      return state;
+  }
+};
+
+
 const moviesReducer = combineReducers({
     condition: conditionReducer,
     result: resultReducer
@@ -49,7 +60,8 @@ const moviesReducer = combineReducers({
 
 const reducer = combineReducers({
     counter: counterReducer,
-    movies: moviesReducer
+    movies: moviesReducer,
+    router: routeReducer
 })
 
 

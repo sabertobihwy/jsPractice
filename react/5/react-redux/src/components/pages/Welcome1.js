@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function ClassList() {
+export default function Welcome1() {
   return (
     <div>
-      <h1>class</h1>
+      <h1>welcome1</h1>
     </div>
   )
 }
