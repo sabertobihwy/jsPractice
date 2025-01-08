@@ -9,11 +9,6 @@ function* numberGenerator(){
 }
 
 function* getMoviesGenerator(action){
-    const currentCondition = yield select(state => state.movies.condition);
-    if (currentCondition === action.payload) {
-        console.log('Condition unchanged, skipping...');
-        return; // 如果条件未改变，直接退出
-    }
     console.log("进来了")
     yield put(setLoadingAction(true)) 
     // const condition =  yield select(state => state.movies.condition)
@@ -34,7 +29,7 @@ function* rootSaga(){
         console.log('Action dispatched:', action.type);
     });
    // yield takeEvery(setConditionAction,getMoviesGenerator)
-   yield takeLatest(setConditionAction, getMoviesGenerator);
+   yield takeEvery(setConditionAction, getMoviesGenerator);
 
     console.log('listening')
 }

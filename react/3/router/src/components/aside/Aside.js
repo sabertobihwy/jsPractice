@@ -6,7 +6,7 @@ export default function Aside() {
     <ul>
       <li><Link to="/studentlist">学生列表</Link></li>
       <li><Link to='/classlist'>班级列表</Link></li>
-      <li><Navigate to="/classlist" replace />123</li>
+      <li>123</li>
       <li>4</li>
     </ul>
   )

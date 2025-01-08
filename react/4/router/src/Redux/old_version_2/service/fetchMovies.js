@@ -13,3 +13,5 @@ async function fetchMovies(url,page,size){
   }
 
   export default fetchMovies
+
+  

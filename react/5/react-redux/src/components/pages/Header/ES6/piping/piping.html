@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="../plugin/helpers.js"></script>
+    <script src="piping.js"></script>
+    <script>
+        // 把str变成驼峰命名：
+
+        var s = "     mY    fIrst nAMe "
+
+        // 1. eachFirstLetterUp 
+        // 2. firstLetterLower
+        // 3. remove spaces 
+
+        var pipe = myPlugin.pipe(eachFirstLetterUp, otherLetterLower, firstLetterLower, removeSpaces)
+        console.log(pipe(s))
+        var pipe2 = myPlugin.pipe2(eachFirstLetterUp, otherLetterLower, firstLetterLower, removeSpaces)
+        console.log(pipe2(s))
+    </script>
+</body>
+
+</html>

@@ -38,18 +38,23 @@ function compose(...arr){
 }
 
 function add(a){
+    console.log("add")
     return a * 2
 }
 function multiple(a){
+    console.log("multiple")
     return a * a
 }
 function addNum(a){
+    console.log("addNum")
     return a + 1
 }
 
-const func = compose(add,multiple,addNum)// a = (...args) => add(multiple(...args)) = 18;   addNum()
+//const func = compose(add,multiple,addNum)// a = (...args) => add(multiple(...args)) = 18;   addNum()
 // add(multiple(addNum(...args)))
-const result = func(3)
+//add(multiple(addNum(3)))
+
+//const result = func(3)
 //console.log(result)
 
 
@@ -68,6 +73,8 @@ function applyMiddleware(...middlewares){
                 ...store,
                 dispatch
             }
+
+
         }
     }
 }
