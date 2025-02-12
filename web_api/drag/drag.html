@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>拖拽示例</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            flex-direction: column;
+        }
+
+        .container {
+            display: flex;
+            gap: 50px;
+        }
+
+        .box {
+            width: 150px;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: bold;
+            border: 2px solid #333;
+            background-color: white;
+        }
+
+        #boxA {
+            background-color: lightblue;
+            cursor: grab;
+        }
+
+        #boxB {
+            background-color: lightgreen;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>拖拽框 A 到框 B</h2>
+    <div class="container">
+        <div id="boxA" class="box" draggable="true">A</div>
+        <div id="boxB" class="box">B</div>
+    </div>
+
+    <script>
+        const boxA = document.getElementById("boxA");
+        const boxB = document.getElementById("boxB");
+        // dataTransfer 用于拖拽的数据传递
+        // 监听拖拽开始事件
+        boxA.addEventListener("dragstart", (e) => {
+            e.dataTransfer.setData("text/plain", "boxA");
+        });
+        // dragover 悬停不断触发
+        // 阻止默认行为（不给放），使 boxB 可以接收拖拽元素
+        boxB.addEventListener("dragover", (e) => {
+            e.preventDefault();
+        });
+        // drop 放下那一刻
+        // 监听拖放事件，确保只有 boxA 能被放入 boxB
+        boxB.addEventListener("drop", (e) => {
+            e.preventDefault(); // 阻止默认（可能会打开文件）
+            const data = e.dataTransfer.getData("text/plain");
+            if (data === "boxA") {
+                boxB.appendChild(boxA);
+                boxA.style.cursor = "default";
+            }
+        });
+    </script>
+
+</body>
+
+</html>
