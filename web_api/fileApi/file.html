@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="file" />
+    <div id="content" style="width:300px; height:300px; border:1px solid black">
+    </div>
+</body>
+<script>
+    // 1. 通过input获得file
+    const ie = document.querySelector('input')
+    ie.addEventListener('change', (e) => {
+        while (ce.firstChild) {
+            ce.removeChild(ce.firstChild); // 逐个删除子元素
+        }
+        console.log(e.target.files)
+        // FileReader
+        const reader = new FileReader()
+        reader.onload = (e) => {
+            const img = new Image()
+            img.src = e.target.result
+            ce.appendChild(img)
+        }
+        reader.readAsDataURL(e.target.files[0])
+    })
+
+    // 2. drag 获得file
+    const ce = document.querySelector('#content')
+    ce.addEventListener('dragover', (e) => {
+        e.preventDefault()
+
+    })
+    ce.addEventListener('drop', (e) => {
+        e.preventDefault()
+        const file = e.dataTransfer.files[0]
+        while (ce.firstChild) {
+            ce.removeChild(ce.firstChild); // 逐个删除子元素
+        }
+        // // FileReader
+        const reader = new FileReader()
+        reader.onload = (e) => {
+            const img = new Image()
+            img.src = e.target.result
+            ce.appendChild(img)
+        }
+        reader.readAsDataURL(file)
+    })
+</script>
+
+</html>
