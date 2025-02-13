@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .aqua{
+        background-color: aquamarine;
+    }
+    .oran{
+        background-color: orange;
+    }
+    .pink{
+        background-color: pink;
+    }
+    button{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+</style>
+<body>
+    <button>swtich theme</button>
+</body>
+<script>
+    const btn = document.querySelector('button')
+    const body = document.querySelector('body')
+    const theme_list = ['aqua','oran','pink']
+    const theme = '_THEME_'
+    const idx = localStorage.getItem(theme) || (localStorage.setItem(theme,0),0)
+    body.classList.add(theme_list[+idx])
+    btn.addEventListener('click', (e)=>{
+        const idx = +localStorage.getItem(theme)
+        const newIdx = idx + 1 === theme_list.length? 0: idx+1
+        body.classList.remove(theme_list[idx])
+        body.classList.add(theme_list[newIdx])
+        localStorage.setItem(theme,newIdx)
+
+    })
+</script>
+</html>
