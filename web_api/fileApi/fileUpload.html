@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    th,
+    td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f4f4f4;
+    }
+</style>
+
+<body>
+    <div id="scanArea" style="width: 500px; height:300px; 
+        border: 1px solid black;display: flex; 
+        align-items: center; color: gray;
+        justify-content: center;">
+        <h1>拖拽到这里进行扫描</h1>
+    </div>
+    <br />
+    <button id="scanFile">扫描文件</button>
+    <button id="scanDir">扫描目录</button>
+    <button id="upload">上传文件</button>
+    <br /><br /><br />
+    <table border="1">
+        <thead> <!-- ✅ 表头部分 -->
+            <tr> <!-- ✅ 正确用法：用 `<tr>` 包裹表头单元格 -->
+                <th>名称</th>
+                <th>文件目录</th>
+                <th>类型</th>
+                <th>文件大小</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody id="table"> <!-- ✅ 表格主体 -->
+
+        </tbody>
+    </table>
+    <input type="file" id='input' multiple hidden />
+    <input type="file" id="folderInput" webkitdirectory multiple hidden>
+</body>
+<script>
+    /**
+     * 1. 单文件，多文件上传
+     * 2. 文件夹上传
+     * 3. 拖拽上传
+     * 
+     * */
+    const dom = {
+        scanArea: document.querySelector('#scanArea'),
+        scanFile: document.querySelector('#scanFile'),
+        scanDir: document.querySelector('#scanDir'),
+        upload: document.querySelector('#upload'),
+        input: document.querySelector('#input'),
+        table: document.querySelector('#table'),
+        folderInput: document.querySelector('#folderInput')
+    }
+    let tmpLst = []
+
+    dom.scanFile.addEventListener('click', (e) => {
+        dom.input.click()
+    })
+    dom.input.addEventListener('change', (e) => {
+        tmpLst.push(...e.target.files)
+        renderTable()
+    })
+    document.body.addEventListener('click', (e) => {
+        if (e.target.classList.contains('del')) {
+            const id = +e.target.dataset.id
+            tmpLst = tmpLst.filter((_, i) => i !== id)
+            //console.log(tmpLst)
+            renderTable()
+        }
+    });
+    dom.scanDir.addEventListener('click', (e) => {
+        dom.folderInput.click()
+    })
+    dom.folderInput.addEventListener('change', async (e) => {
+        Array.from(e.target.files).forEach(file => { tmpLst.push(file) })
+        //  await Promise.all(e.target.items.map(item => getFiles(item.webkitGetAsEntry())))
+
+        console.log(tmpLst)
+        renderTable()
+    })
+    dom.scanArea.addEventListener('dragover', (e) => {
+        e.preventDefault()
+    })
+    dom.scanArea.addEventListener('drop', async (e) => {
+        e.preventDefault()
+        //console.log(e.dataTransfer.items)
+        const arr = Array.from(e.dataTransfer.items)
+        await Promise.all(arr.map(item => getFiles(item.webkitGetAsEntry())))
+        renderTable()
+    })
+
+    async function getFiles(entry) {
+        return new Promise((resolve) => {
+            if (entry.isFile) {
+                entry.file((file) => {
+                    tmpLst.push(file)
+                    resolve()
+                });
+            } else if (entry.isDirectory) {
+                const reader = entry.createReader();
+                reader.readEntries(async (entries) => {
+                    await Promise.all(entries.map(entry => getFiles(entry)))
+                    resolve()
+                })
+            }
+        })
+
+    }
+
+    function renderTable() {
+        while (dom.table.firstChild) {
+            dom.table.firstChild.remove()
+        }
+        let str = ""
+        tmpLst.forEach((file, i) => str += `
+         <tr>
+                <td>${file.name}</td>
+                <td></td>
+                <td>${file.type}</td>
+                <td>${file.size > 1024 * 1024 ? Math.round(file.size / (1024 * 1024)) + "MB"
+                : Math.round(file.size / 1024) + "KB"}
+                    </td>
+                <td><button class="del" data-id=${i}>删除</button></td>
+            </tr>`)
+        dom.table.innerHTML = str
+    }
+
+
+</script>
+
+</html>
