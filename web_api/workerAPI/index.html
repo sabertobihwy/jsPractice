@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+    }
+
+    #area {
+        --width: 400px;
+        --height: 200px;
+        width: var(--width);
+        height: var(--height);
+        position: relative;
+    }
+
+    #circle {
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        width: 50px;
+        height: 50px;
+        background-color: pink;
+        border-radius: 50%;
+        animation: move 5s linear infinite;
+    }
+
+    @keyframes move {
+        0% {
+            top: 0px;
+            left: 0px;
+        }
+
+        10% {
+            top: var(--height);
+            left: 0px;
+        }
+
+        50% {
+            top: var(--height);
+            left: var(--width);
+        }
+
+        70% {
+            top: 0px;
+            left: var(--width);
+        }
+
+        100% {
+            top: 0px;
+            left: 0px;
+        }
+    }
+</style>
+
+<body>
+    <button id="btn">start</button>
+    <div id="area">
+        <div id="circle"></div>
+    </div>
+</body>
+
+<script>
+    const btn = document.querySelector('#btn')
+    btn.addEventListener('click', (e) => {
+        const worker = new Worker("./worker.js")
+        worker.postMessage("start")
+        worker.onmessage = (e)=>{
+            const decoder = new TextDecoder();
+            const receivedString = decoder.decode(e.data);
+         //  console.log('over,result is '+ receivedString)
+           
+            function fn(len){
+                if(len >= receivedString.length){
+                    console.log("over")
+                    return 
+                }
+                requestIdleCallback((deadline)=>{
+                    while (deadline.timeRemaining() > 0 && len < receivedString.length) {
+                        console.log(receivedString.slice(len, len + 50)); // 分段打印
+                        len += 20;
+                    }
+                // 继续调度下一帧
+                fn(len);
+                })
+            }
+            fn(0)
+        }
+        
+    })
+</script>
+
+</html>
