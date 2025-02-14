@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    const request = window.indexedDB.open('test', 1) // db name & version
+    request.onupgradeneeded = (e)=>{ // init || upgrade
+        const db = e.target.result  
+        const store = db.createObjectStore('user') // object store , like table_name
+        store.add({name: 'cxk'},'usr1')
+    }
+    async function addData(store, data, key){
+        return new Promise((resolve,reject)=>{
+            const r = store.add(data,key)
+            r.onsuccess = (e)=>{
+                resolve()
+            }
+            r.onerror = (e)=>{
+                reject(e.target.error)
+            }
+        })
+    }
+    async function getAllData(store){
+        return new Promise((resolve,reject)=>{
+            const r = store.getAll()
+            r.onsuccess = (e)=>{
+                resolve(e.target.result)
+            }
+            r.onerror = (e)=>{
+                reject(e.target.error)
+            }
+        })
+    }
+    request.onsuccess = async (e) =>{
+        console.log('success') 
+        // read write 要通过transaction
+        const db = e.target.result 
+        const trans = db.transaction(['user'],'readwrite')
+        const store = trans.objectStore('user')
+        try {
+            await addData(store,{name: 'hwy'},'usr0')
+            const result = await getAllData(store)
+        } catch (error) {
+            console.log(error)
+        }
+        
+    }
+    request.onerror = (e) =>{
+        console.log('error')
+    }
+</script>
+</html>

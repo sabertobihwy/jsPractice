@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./commonJs.js" ></script>
+</head>
+<body>
+    <label for="user">username
+        <input id="user" type="text" required/>
+    </label>
+    <br/> <br/> 
+    <label for="avatar">avatar
+        <input id="avatar" type="file" required/>
+    </label>
+    <br/> <br/> 
+    <button id="add"> add user</button>
+    <button id="find"> find all user</button>
+    <br/> <br/>
+    <table style="border-collapse: collapse;">
+        <thead>
+            <th>username</th>
+            <th>avatar</th>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</body>
+<script>
+    const dom = {
+        user : document.querySelector('#user'),
+        avatar: document.querySelector('#avatar'),
+        tbody: document.querySelector('tbody'),
+        addBtn: document.querySelector('#add'),
+        findBtn: document.querySelector('#find')
+    }
+    const request = window.indexedDB.open('userdb', 3)
+    let db = null
+    let imgDataUrl = ""
+    let filetype = ""
+    request.onupgradeneeded = (e)=>{ // init || upgrade
+        db = e.target.result  
+        console.log('init')
+        if(!db.objectStoreNames.contains('user')){
+            db.createObjectStore('user') // init table 
+        }
+    }
+    request.onsuccess = (e) =>{
+        db = e.target.result  
+        console.log("connect success")
+
+   }
+
+    function renderTableAsDataURL(result){
+        let str = ""
+        result.forEach((item) => {
+            str += `
+            <tr>
+                <td>${item.name}</td>
+                <td><img style="height:50px" src=${item.image}></td>
+            </tr>
+        
+        `
+        })
+        dom.tbody.innerHTML = str
+    }
+    function renderTableAsBlob(result){
+        let str = ""
+        result.forEach((item) => {
+            const blob = new Blob([item.image], { type: item.type });
+            const url = URL.createObjectURL(blob)
+            str += `
+            <tr>
+                <td>${item.name}</td>
+                <td><img style="height:50px" src=${url}></td>
+            </tr>
+        
+        `
+        })
+        dom.tbody.innerHTML = str
+    }
+
+    function renderTableAsBlob2(result) {
+    const fragment = document.createDocumentFragment(); // 创建文档片段
+    const urls = []; // 存储 URL 以便释放
+    dom.tbody.innerHTML = ""; // 清空表格，避免重复渲染
+
+    result.forEach((item) => {
+        const blob = new Blob([item.image], { type: item.type });
+        const url = URL.createObjectURL(blob);
+        urls.push(url);
+
+        const tr = document.createElement("tr");
+
+        const tdName = document.createElement("td");
+        tdName.textContent = item.name;
+
+        const tdImage = document.createElement("td");
+        const img = document.createElement("img");
+        img.src = url;
+        img.style.height = "50px";
+
+        tdImage.appendChild(img);
+        tr.appendChild(tdName);
+        tr.appendChild(tdImage);
+        fragment.appendChild(tr);
+    });
+
+    dom.tbody.appendChild(fragment); // **一次性插入，避免多次 reflow**
+
+    // **释放旧的 Blob URL，防止内存泄漏**
+    setTimeout(() => {
+        urls.forEach(url => URL.revokeObjectURL(url));
+    }, 3000); // 延迟释放，确保图片渲染完成
+}
+
+    function validate(){
+       return  /^\S+$/.test(dom.user.value) && /^\S+$/.test(dom.avatar.value)
+    }
+    function validate2() {
+    const fields = ['user', 'avatar']; // 需要校验的字段
+    const regex = /^\S+$/; // 只创建一次正则
+
+    return fields.every(field => regex.test(dom[field].value));
+}
+
+
+    dom.avatar.addEventListener('change', (e) =>{
+        const file = e.target.files[0]
+        filetype = file.type
+        const reader = new FileReader()
+        reader.onload = (e)=>{
+            imgDataUrl = e.target.result
+        }
+        //reader.readAsDataURL(file)
+        reader.readAsArrayBuffer(file)
+
+    })
+    dom.addBtn.addEventListener('click', async (e)=>{
+        // 1. add 
+        if(db){
+            const trans = db.transaction(['user'],'readwrite')
+            store = trans.objectStore('user')
+            if(!validate2()) {
+                console.log("required")
+                return 
+            }
+            try {
+                await addData(store,{name: dom.user.value, image: imgDataUrl, type: filetype},dom.user.value)
+                // 2. find All 
+                const result = await getAllData(store)
+                console.log(result)
+                 // 3. render table 
+                 renderTableAsBlob(result)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    })
+
+    dom.findBtn.addEventListener('click', async (e)=>{
+        if(db){
+            const trans = db.transaction(['user'],'readonly')
+            store = trans.objectStore('user')
+            try {
+                const result = await getAllData(store)
+               // renderTable(result)
+               renderTableAsBlob2(result)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+    })
+</script>
+</html>
