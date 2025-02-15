@@ -1,0 +1,1 @@
+navigator.hardwareConcurrency // 浏览器最大worker数量

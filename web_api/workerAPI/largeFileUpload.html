@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="file" id="file">
+    <button id="fileUpload">upload</button>
+</body>
+<script>
+    const btn = document.querySelector('#fileUpload')
+    const inputFile = document.querySelector('#file')
+    function distributeChunk(chunk_count, WORKER_NUM){
+        const arr = Array.from({length: WORKER_NUM}, ()=>[])
+        for(let i =0; i<chunk_count; i++){
+           const worker_index = i % WORKER_NUM
+           arr[worker_index].push(i)
+        }
+        return arr
+    }
+    const CHUNK_SIZE = 1024 * 1024
+    const WORKER_NUM = 4
+    let fileChunkArr = []
+    inputFile.addEventListener('change', (e)=>{
+        fileChunkArr = []
+        const largeFile = e.target.files[0]
+        const reader = new FileReader()
+        reader.onload = (e)=>{
+            const buffer = e.target.result
+            // console.log(buffer)
+            const chunk_count = Math.ceil(buffer.byteLength / CHUNK_SIZE)
+            const chunk_index_arr = distributeChunk(chunk_count, WORKER_NUM)
+            Promise.all(Array.from({length:WORKER_NUM}).map((_,i)=> new Promise((resolve)=>{
+                const worker = new Worker('./worker2.js')
+                const worker_arr = chunk_index_arr[i]
+                worker.postMessage({worker_arr, CHUNK_SIZE,buffer})
+                worker.onmessage = (e)=>{
+                   Object.entries(e.data).forEach(([key,value])=>{
+                    fileChunkArr[key] = value
+                   })
+                   worker.terminate()
+                   resolve()
+                }
+            }))).then(()=>{console.log(fileChunkArr)})
+            
+        }
+        reader.readAsArrayBuffer(largeFile)
+        
+    })
+    btn.addEventListener('click',(e)=>{
+
+    })
+</script>
+</html>

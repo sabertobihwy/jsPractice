@@ -81,6 +81,7 @@
             function fn(len){
                 if(len >= receivedString.length){
                     console.log("over")
+                    worker.terminate();
                     return 
                 }
                 requestIdleCallback((deadline)=>{
