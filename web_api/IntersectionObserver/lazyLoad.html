@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    div{
+        width: 800px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+</style>
+<body>
+   <div>
+    <!-- img*30[src='./default.jpg data-src=https://picsum.photos/200/300?$'] -->
+    <img src="./default.jpg" alt="" data-src="https://picsum.photos/200/300?1"><img src="./default.jpg" alt="" data-src="https://picsum.photos/200/300?2"><img src="./default.jpg" alt="" data-src="https://picsum.photos/200/300?3"><img src="./default.jpg" alt="" data-src="https://picsum.photos/200/300?4"><img src="./default.jpg" alt="" data-src="https://picsum.photos/200/300?5"><img src="./default.jpg" alt="" data-src="https://picsum.photos/200/300?6"><img src="./default.jpg" alt="" data-src="https://picsum.photos/200/300?7"><img src="./default.jpg" alt="" data-src="https://picsum.photos/200/300?8"><img src="./default.jpg" alt="" data-src="https://picsum.photos/200/300?9"><img src="./default.jpg" alt="" data-src="https://picsum.photos/200/300?10"><img src="./default.jpg" alt="" data-src="https://picsum.photos/200/300?11"><img src="./default.jpg" alt="" data-src="https://picsum.photos/200/300?12"><img src="./default.jpg" alt="" data-src="https://picsum.photos/200/300?13"><img src="./default.jpg" alt="" data-src="https://picsum.photos/200/300?14"><img src="./default.jpg" alt="" data-src="https://picsum.photos/200/300?15"><img src="./default.jpg" alt="" data-src="https://picsum.photos/200/300?16"><img src="./default.jpg" alt="" data-src="https://picsum.photos/200/300?17"><img src="./default.jpg" alt="" data-src="https://picsum.photos/200/300?18"><img src="./default.jpg" alt="" data-src="https://picsum.photos/200/300?19"><img src="./default.jpg" alt="" data-src="https://picsum.photos/200/300?20"><img src="./default.jpg" alt="" data-src="https://picsum.photos/200/300?21"><img src="./default.jpg" alt="" data-src="https://picsum.photos/200/300?22"><img src="./default.jpg" alt="" data-src="https://picsum.photos/200/300?23"><img src="./default.jpg" alt="" data-src="https://picsum.photos/200/300?24"><img src="./default.jpg" alt="" data-src="https://picsum.photos/200/300?25"><img src="./default.jpg" alt="" data-src="https://picsum.photos/200/300?26"><img src="./default.jpg" alt="" data-src="https://picsum.photos/200/300?27"><img src="./default.jpg" alt="" data-src="https://picsum.photos/200/300?28"><img src="./default.jpg" alt="" data-src="https://picsum.photos/200/300?29"><img src="./default.jpg" alt="" data-src="https://picsum.photos/200/300?30">
+   </div>
+</body>
+<script>
+    const imgs = document.querySelectorAll('img[data-src]')
+    const ib = new IntersectionObserver((entries)=>{
+        entries.forEach((entry)=>{
+            if(entry.isIntersecting){
+              //  console.log(entry.target.src)
+               // console.log(entry.target.dataset.src)
+                entry.target.src = entry.target.dataset.src
+            }
+        })
+    },{
+        threshold: 0
+    })
+    imgs.forEach(img=>{
+        ib.observe(img)
+    })
+</script>
+</html>

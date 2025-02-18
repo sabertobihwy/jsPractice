@@ -31,3 +31,14 @@ const addEvent2 = (function () {
     }
 
 })()
+
+function replace(str) {
+    return str.replaceAll(/\s+/g, 1)
+}
+
+const replace2 = (function () {
+    const regex = new RegExp(/\s+/, 'g')
+    return function (str) {
+        return str.replaceAll(regex, 1)
+    }
+})()

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #container{
+        width: 100px;
+        height: 200px;
+        overflow: scroll;
+        border: red 1px solid;
+    }
+    .block{
+        width: 100%;
+        height: 100px;
+    }
+    #box{
+        width: 100%;
+        height: 50px;
+        background-color: aquamarine;
+    }
+</style>
+<body>
+    <div id="container">
+        <div class="block">item1</div>
+        <div class="block">item2</div>
+        <div class="block">item3</div>
+        <div id="box">boxxx</div>
+    </div>
+</body>
+<script>
+    const container = document.querySelector('#container')
+    const box = document.querySelector('#box')
+    const io = new IntersectionObserver((entries)=>{
+        console.log(entries)
+        // if(entries[0].isIntersecting){
+        //     console.log('is intersecting')
+        // }
+    },{
+        root: container, // root dom
+        threshold: 1 // complete 
+    })
+    io.observe(box) // be observed
+</script>
+</html>

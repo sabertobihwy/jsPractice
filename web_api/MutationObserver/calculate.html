@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <table>
+        <tr>
+            <th></th>
+            <th>单价</th>
+            <th>数量</th>
+            <th>总价</th>
+        </tr>
+        <tr>
+            <td>苹果</td>
+            <td>5</td>
+            <td id="ap">3</td>
+            <td id="apSum">15</td>
+        </tr>
+        <tr>
+            <td>栗子</td>
+            <td>8</td>
+            <td id="cn">2</td>
+            <td id="cnSum">16</td>
+        </tr>
+    </table>
+</body>
+<script>
+    const ap = document.querySelector('#ap')
+    const cn = document.querySelector('#cn')
+    const apSum = document.querySelector('#apSum')
+    const cnSum = document.querySelector('#cnSum')
+    function addNum(dom){
+        dom.innerText = +dom.innerText + 1
+    }
+    const mo = new MutationObserver((mus)=>{
+        mus.forEach((mu)=>{
+            console.log(mu.target.id)
+             if(mu.target.id === 'ap' || mu.target.id === 'cn'){
+                let a = mu.target.innerText
+                console.log(1)
+                mu.target.nextElementSibling.innerText = 'update'+ a
+             }
+        })
+    })
+    mo.observe(ap,{
+        childList: true
+    })
+    mo.observe(cn,{
+        childList: true
+    })
+    addNum(ap)
+    addNum(cn)
+</script>
+</html>

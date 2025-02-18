@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+
+    </div>
+    <span>
+
+    </span>
+</body>
+<script>
+    const div = document.querySelector('div')
+    const span = document.querySelector('span')
+    const mo = new MutationObserver((mus)=>{
+        mus.forEach(console.log)
+    })
+    mo.observe(div,{
+        attributes: true,
+        childList: true,
+        characterData: true
+    })
+    mo.observe(span,{
+        attributes: true,
+        childList: true,
+        characterData: true
+    })
+
+    function change(dom){
+        const node = document.createTextNode("")
+        node.data = 123
+        dom.appendChild(node)
+        dom.style.border = '1px solid red'
+    }
+    change(div)
+    change(span)
+</script>
+</html>

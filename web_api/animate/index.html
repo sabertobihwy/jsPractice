@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    div{
+        position: absolute;
+        width: 50px;
+        height: 50px;
+        top: 10px;
+        left: 10px;
+        background-color: pink;
+    }
+</style>
+<body>
+    
+    <div></div>
+</body>
+<script>
+    const div = document.querySelector('div')
+    function getColor(){
+        return '#' + Math.random().toString(16).slice(2,8)
+    }
+    // offset的意思是在什么进程之前，完成xxx动画
+    // 全部效果同时进行
+    div.animate([
+        {backgroundColor: getColor(), offset: 0.1},
+        {backgroundColor: getColor(), offset: 0.2},
+        {transform: 'translateX(100px)', offset: 1}
+    ],{
+        duration : 3000,
+        fill: 'forwards'
+    }).onfinish = ()=>{ // 每次都是按照最初的位置计算的
+        div.animate([
+        { transform: 'translateX(100px) translateY(100px)', offset: 0.5 },
+        { transform: 'translateY(100px)', offset: 1 }
+    ], {
+        duration: 1500, 
+        fill: 'forwards'
+    });
+    }
+</script>
+</html>
