@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    div {
+        width: 100px;
+        height: 100px;
+        background-color: blue;
+    }
+</style>
+
+<body>
+    <div></div>
+    <button></button>
+</body>
+<script src="./rgb.js"></script>
+<script>
+    const button = document.querySelector('button')
+    const div = document.querySelector('div')
+    button.addEventListener('click', () => {
+        const bgColor = window.getComputedStyle(div).backgroundColor; // 确保获取最终计算后的颜色
+
+        const rgbValues = bgColor.match(/\d+/g);
+        const r = parseInt(rgbValues[0]);
+        const g = parseInt(rgbValues[1]);
+        const b = parseInt(rgbValues[2]);
+        console.log(`rgb(${r}, ${g}, ${b})`)
+        const grayValue = Math.round(gray(r, g, b));
+        console.log(`rgb(${grayValue}, ${grayValue}, ${grayValue})`)
+        div.style.backgroundColor = `rgb(${grayValue}, ${grayValue}, ${grayValue})`
+    })
+
+</script>
+
+</html>
