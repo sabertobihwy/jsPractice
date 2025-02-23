@@ -19,7 +19,7 @@ String.prototype.asyncReplaceAll = async function (pattern, asyncFn) {
         if (!pattern.global) {
             throw new TypeError('should be global')
         }
-        pattern = new RegExp(pattern)
+        pattern = new RegExp(pattern.source, pattern.flags); // 
     } else {
         throw new TypeError('should be a RegExp')
     }
