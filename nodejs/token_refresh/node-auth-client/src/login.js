@@ -13,24 +13,22 @@ export async function loginFn() {
 }
 
 export async function protectedIF() {
-    try {
-        const resp = await ins.get('/api/auth/protected')
-        console.log(resp)
-    } catch (error) {
-        console.log(error.response.data.message)
-    }
+    const resp = await ins.get('/api/auth/protected')
+    console.log(resp)
+
 
 }
 
 export async function refreshToken() {
-    try {
-        const resp = await ins.get('/api/auth/refresh', {
-            headers: {
-                RefreshToken: `Bearer ${getRefreshToken()}`
-            }
-        })
-        console.log(resp)
-    } catch (error) {
-        console.log(error.response.data.message)
-    }
+    const resp = await ins.get('/api/auth/refresh', {
+        headers: {
+            RefreshToken: `Bearer ${getRefreshToken()}`
+        },
+        _isRefreshToken: true
+    })
+    console.log(resp)
+}
+
+export function isRefreshTokan(config) {
+    return !!config._isRefreshToken
 }
