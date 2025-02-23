@@ -4,6 +4,7 @@ const add = new Proxy(
     },
     {
         get(target, propertyKey, receiver) {
+            // 调用函数时，先读取函数再调用
             if (propertyKey === Symbol.toPrimitive) {
                 return () => {
                     return target._store
