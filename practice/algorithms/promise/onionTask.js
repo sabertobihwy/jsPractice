@@ -1,5 +1,4 @@
 class TaskPro {
-
     _q = []
     _isRunning = false
     _idx = 0

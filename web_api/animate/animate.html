@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>price: <span id="price">40</span></h2>
+</body>
+<script src="./animate.js"></script>
+<script>
+    const dom = document.querySelector('#price')
+    animate(40, 150, 3000, (value) => {
+        dom.textContent = value
+    })
+</script>
+
+</html>
