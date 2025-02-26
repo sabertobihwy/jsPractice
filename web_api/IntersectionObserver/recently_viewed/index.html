@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        background-color: black;
+    }
+
+    #container {
+        display: flex;
+        margin: 10px 35px 10px 35px;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    #viewed_btn {
+        position: fixed;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .card {
+        width: 150px;
+        height: 250px;
+        border: 1px solid white;
+    }
+</style>
+
+<body>
+    <div id="container"></div>
+    <button id="viewed_btn">刚刚看过</button>
+</body>
+<script src="./index.js"></script>
+<script>
+    createElement(20)
+</script>
+
+</html>
