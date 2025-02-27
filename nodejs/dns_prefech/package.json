@@ -1,0 +1,16 @@
+{
+  "name": "dns_prefech",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "glob": "^11.0.1",
+    "node-html-parser": "^7.0.1"
+  }
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="netStatus"></div>
+</body>
+<script>
+    const dom = document.querySelector('#netStatus')
+    let net = {}
+    function getNetWorkStatus() {
+        if (navigator.onLine) {
+            net = {
+                type: navigator.connection.effectiveType,
+                rtt: navigator.connection.rtt,
+                downlink: navigator.connection.downlink
+            }
+        } else {
+            net = {
+                status: 'offline'
+            }
+        }
+    }
+    function updatePanel() {
+        getNetWorkStatus()
+        if (net.status) {
+            dom.innerHTML = `<h1>offline</h1>`
+        } else {
+            dom.innerHTML = `
+             <h1>${net.type}</h1>
+              <h1>${net.rtt}</h1>
+               <h1>${net.downlink}</h1>
+             `
+        }
+    }
+    window.addEventListener('online', updatePanel)
+    window.addEventListener('offline', updatePanel)
+    navigator.connection.addEventListener('change', updatePanel)
+
+</script>
+
+</html>
