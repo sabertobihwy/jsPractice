@@ -9,6 +9,7 @@ function runMicroTask(callback) {
     } else if (MutationObserver) {
         const p = document.createElement('p')
         const observer = new MutationObserver(callback)
+
         observer.observe(p, {
             childList: true
         })
@@ -104,7 +105,7 @@ class MyPromise {
                     status: FULFILLED,
                     value: data
                 }
-            }, (reason) => {
+            }, (reason) => { // 错误被捕获，这个promise结束后依然是fulfilled
                 return {
                     status: REJECTED,
                     value: reason
