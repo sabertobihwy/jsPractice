@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    :root {
+        --imgUrl: url(./default.jpg);
+    }
+
+    .upload {
+        position: absolute;
+        inset: 10px;
+        width: 200px;
+        height: 200px;
+        border: 1px solid black;
+    }
+
+    #select {
+        width: inherit;
+        height: inherit;
+    }
+
+    #file-upload {
+        opacity: 0;
+    }
+
+    #upload-label {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 100px;
+        color: #ccc;
+        cursor: grab;
+    }
+
+    .upload.start #process,
+    .upload.start #result {
+        display: none;
+    }
+
+    .upload.processing #select,
+    .upload.processing #result {
+        display: none;
+    }
+
+    .upload.end #select,
+    .upload.end #process {
+        display: none;
+    }
+
+    #process {
+        width: inherit;
+        height: inherit;
+        background-image: var(--imgUrl);
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+
+    .overlay {
+        width: inherit;
+        height: inherit;
+        opacity: 0.4;
+        background-color: black;
+    }
+
+    .progress-bar {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .progress-bar h2 {
+        color: white;
+
+    }
+
+    .progress {
+        width: 80%;
+        height: 10px;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 5px;
+    }
+</style>
+
+<body>
+    <div class="upload processing">
+        <div id="select">
+            <input type="file" id="file-upload" />
+            <label for="file-upload" id="upload-label">+</label>
+        </div>
+        <div id="process">
+            <div class="overlay">
+                <div class="progress-bar">
+                    <h2>20%</h2>
+                    <div class="progress" style="width: 0%;"></div>
+                    <h2>文件上传中</h2>
+                    <button>cancel</button>
+                </div>
+            </div>
+        </div>
+        <div id="result"></div>
+    </div>
+</body>
+
+</html>
