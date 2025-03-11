@@ -1,6 +1,7 @@
 import { Route, Routes, NavLink, Navigate } from "react-router";
 import Home from "./component/Home";
 import About from "./component/About";
+import CustomRoute from "./routes/route";
 
 
 function App() {
@@ -29,11 +30,12 @@ function App() {
           </div>
         </div>
       </header>
-      <Routes>
+      <CustomRoute />
+      {/* <Routes>
         <Route path="/home" element={<Home />}></Route>
         <Route path="/about" element={<About />}></Route>
         <Route path="/" element={<Navigate replace={true} to="/home" ></Navigate>} ></Route>
-      </Routes>
+      </Routes> */}
     </div>
 
   );
