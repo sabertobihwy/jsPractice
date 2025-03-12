@@ -1,11 +1,32 @@
-function throttle(func, wait) {
+function throttle(func, wait, { leading = true, trailing = true }) {
     let id;
+    let latestArgs;
+    let latestThis;
+    let extraInvoke = false;
     return function (...args) {
         if (!id) {
-            func.apply(this, args)
             id = setTimeout(() => {
                 id = null
+                // 如果 wait 时间内没有额外调用，trailing 不会触发。
+                if (trailing && extraInvoke) {
+                    func.apply(latestThis, latestArgs)
+                    latestArgs = null
+                    latestThis = null
+                    extraInvoke = false // **确保 trailing 触发后重置**
+                } // 需要是最后调用的参数
             }, wait)
+            if (leading) {
+                func.apply(this, args)
+            } else {
+                // leading: false 时，trailing 并不需要 wait 期间额外调用才能执行。即使 没有额外调用，
+                latestArgs = args
+                latestThis = this
+                extraInvoke = true;
+            }
+        } else {
+            latestArgs = args
+            latestThis = this
+            extraInvoke = true
         }
 
     }
